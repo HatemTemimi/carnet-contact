@@ -17,11 +17,6 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6">
-            <mat-form-field class="full-width">
-              <textarea formControlName="addresse" matInput="" placeholder="Address"></textarea>
-            </mat-form-field>
-          </div>
           <div class="col-md-6 top-padding">
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Date de naissance</mat-label>
@@ -29,7 +24,45 @@
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>                  
-            </div>
+          </div>
+<div class="col-sm-6" formArrayName="addresses">
+  <div *ngFor="let control of contactForm.controls.addresses['controls']; let i=index;"  [formGroupName]="i">
+      <br>        
+    <mat-card  >
+            <mat-card-subtitle>Bloc d'addresse {{i+1}}</mat-card-subtitle> 
+              <mat-radio-group formControlName="type" aria-labelledby="Type d'addresse" class="margin-left">
+                
+                <mat-radio-button value="domicile">Domicile</mat-radio-button>
+                <mat-radio-button value="travail">Travail</mat-radio-button>
+               
+              </mat-radio-group>
+              <mat-form-field  class="full-width">
+                <input formControlName="rue"  matInput="" placeholder="Rue">
+              </mat-form-field>
+              <mat-form-field  class="full-width">
+                <input formControlName="ville"  matInput="" placeholder="Ville">
+              </mat-form-field>
+              <mat-form-field  class="full-width">
+                <input formControlName="numero"  matInput="" placeholder="Numero">
+              </mat-form-field>
+              <mat-form-field  class="full-width">
+                <input formControlName="pays"  matInput="" placeholder="Pays">
+              </mat-form-field>
+              <mat-form-field  class="full-width">
+                <textarea formControlName="commentaire"  matInput="" placeholder="Commentaire"></textarea>
+              </mat-form-field>
+              <mat-form-field  class="full-width">
+                <input  formControlName="numeroTel" matInput="" placeholder="Numero de téléphone">
+              </mat-form-field>
+
+            </mat-card>
+        </div>  
+          </div>
+
+ <br>
+            <button (click)="ajouterAddresse()" mat-raised-button color="primary">Ajouter Addresse</button>
+          
+          
         </div>
         
       </mat-card-content>

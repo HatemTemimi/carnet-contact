@@ -16,7 +16,7 @@ import {MatMenu, MatMenuModule} from '@angular/material/menu';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import { ContactsGridComponent } from './contacts-grid/contacts-grid.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule,FormGroup,FormArray } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { BlocAddresseComponent } from './bloc-addresse/bloc-addresse.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     AppComponent,
     NavbarComponent,
     ContactsGridComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    BlocAddresseComponent
   ],
   imports: [
     HttpClientModule,
@@ -57,7 +59,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
