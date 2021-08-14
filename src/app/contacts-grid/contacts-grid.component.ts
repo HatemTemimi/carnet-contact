@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AllCommunityModules } from '@ag-grid-community/all-modules';
+
+
+
+
 
 @Component({
   selector: 'app-contacts-grid',
@@ -7,21 +12,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactsGridComponent implements OnInit {
 
+  public defaultColDef;
+
    columnDefs = [
-        { field: 'Nom' },
-        { field: 'Prénom' },
+        { headerName: 'Personnes',
+        children: [
+            {field: 'Nom'},
+            {field: 'Prénom'},
+            {field: 'DDN'},
+        ]
+      },
+      {
+        headerName: 'Addresses',
+        children:[
+          {field: 'type'},
+          {field: 'Rue'},
+          {field: 'Ville'},
+          {field: 'Numero'},
+          {field: 'Pays'},
+          {field: 'Commentaire', columnGroupShow: 'closed',},
+          {field: 'Numero téléphone', columnGroupShow: 'closed',}
+        ]
+      },
+      
         
-        { field: 'Date'},
-        { field: 'Addresse'},
       ];
 
     rowData = [
-        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000 , Addresse: 'Tunisia'},
-        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000 , Addresse: 'Tunisia'},
-        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000, Addresse: 'Tunisia'},
+        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000 , Addresse: 'Tunisia', country: 'Tun', sport:'foot'},
+        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000 , Addresse: 'Tunisia',country: 'Tun', sport:'foot'},
+        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000, Addresse: 'Tunisia', country: 'Tun', sport:'foot'},
     ];
 
-  constructor() { }
+  constructor() {
+     this.defaultColDef = {
+      flex: 1,
+      minWidth: 150,
+      resizable: true,
+    };
+   }
 
   ngOnInit(): void {
   }
