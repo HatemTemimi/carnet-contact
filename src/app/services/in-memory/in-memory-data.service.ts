@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
+import * as faker from 'faker/locale/en_US';
+
 @Injectable({
   providedIn: 'root',
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const contacts = [
-        { id:1, Nom: 'Hatem', Prénom: 'Temimi', Date: 35000 , Addresse: 'Tunisia'},
-        { id:2, Nom: 'Hatem', Prénom: 'Temimi', Date: 35000 , Addresse: 'Tunisia'},
-        { id:3, Nom: 'Hatem', Prénom: 'Temimi', Date: 35000, Addresse: 'Tunisia'},
-   
-      
-    ];
+        { id:faker.random.uuid(), nom: faker.internet.domainName(), prenom:faker.name.findName(),dateDeNaissance:faker.date.future()},
+        { id:faker.random.uuid(), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance:faker.date.future()},
+        { id:faker.random.uuid(), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance:faker.date.future()},
+   ];
     return {contacts};
   }
 

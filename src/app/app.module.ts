@@ -5,15 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { HttpClientInMemoryWebApiModule, InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory/in-memory-data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatMenu, MatMenuModule} from '@angular/material/menu';
-import {MatIcon, MatIconModule} from '@angular/material/icon';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatButtonModule} from '@angular/material/button';
+import { MatMenu, MatMenuModule} from '@angular/material/menu';
+import { MatIcon, MatIconModule} from '@angular/material/icon';
 import { ContactsGridComponent } from './contacts-grid/contacts-grid.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { FormsModule, ReactiveFormsModule,FormGroup,FormArray } from '@angular/forms';
@@ -25,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BlocAddresseComponent } from './bloc-addresse/bloc-addresse.component';
+import { ContactServiceService } from './services/contact/contact-service.service';
 
 
 @NgModule({
@@ -37,9 +38,9 @@ import { BlocAddresseComponent } from './bloc-addresse/bloc-addresse.component';
   ],
   imports: [
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService, { dataEncapsulation: false }
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false, delay: 500 }
 ),
+    InMemoryWebApiModule.forFeature(InMemoryDataService),  
     BrowserModule,
     MatMenuModule,
     AppRoutingModule,
@@ -62,7 +63,7 @@ import { BlocAddresseComponent } from './bloc-addresse/bloc-addresse.component';
     ReactiveFormsModule,
     
   ],
-  providers: [],
+  providers: [ContactServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

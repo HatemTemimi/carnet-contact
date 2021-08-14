@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AllCommunityModules } from '@ag-grid-community/all-modules';
+import { ContactServiceService } from '../services/contact/contact-service.service';
+import { Contact } from '../interfaces/contact';
 
-
+import * as faker from 'faker/locale/en_US';
 
 
 
@@ -11,48 +13,53 @@ import { AllCommunityModules } from '@ag-grid-community/all-modules';
   styleUrls: ['./contacts-grid.component.scss']
 })
 export class ContactsGridComponent implements OnInit {
-
+  
   public defaultColDef;
 
-   columnDefs = [
+  columnDefs = [
         { headerName: 'Personnes',
         children: [
-            {field: 'Nom'},
-            {field: 'Prénom'},
-            {field: 'DDN'},
+            {field: 'nom'},
+            {field: 'prenom'},
+            {field: 'dateDeNaissance'},
         ]
       },
       {
         headerName: 'Addresses',
         children:[
+          
           {field: 'type'},
-          {field: 'Rue'},
-          {field: 'Ville'},
-          {field: 'Numero'},
-          {field: 'Pays'},
-          {field: 'Commentaire', columnGroupShow: 'closed',},
-          {field: 'Numero téléphone', columnGroupShow: 'closed',}
+          {field: 'rue'},
+          {field: 'ville'},
+          {field: 'numero'},
+          {field: 'codePostal',columnGroupShow: 'closed'},
+          {field: 'pays'},
+          {field: 'commentaire', columnGroupShow: 'closed',},
+          {field: 'numeroTel', columnGroupShow: 'closed',}
         ]
       },
-      
-        
-      ];
+  ];
 
-    rowData = [
-        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000 , Addresse: 'Tunisia', country: 'Tun', sport:'foot'},
-        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000 , Addresse: 'Tunisia',country: 'Tun', sport:'foot'},
-        { Nom: 'Hatem', Prénom: 'Temimi', Date: 35000, Addresse: 'Tunisia', country: 'Tun', sport:'foot'},
-    ];
+  rowData: Contact[] = [];
 
-  constructor() {
+  
+  
+
+  constructor(private myServ: ContactServiceService) {
      this.defaultColDef = {
       flex: 1,
-      minWidth: 150,
+      minWidth: 100,
       resizable: true,
     };
    }
 
   ngOnInit(): void {
+    this.myServ.getContacts().subscribe(data=>{
+       this.rowData = data;
+      console.log(data);
+    
+    });
+    
   }
 
 }
