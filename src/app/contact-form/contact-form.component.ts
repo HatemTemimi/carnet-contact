@@ -4,8 +4,8 @@ import {Contact} from "../interfaces/contact";
 import {ContactService} from "../services/contact.service";
 import {formatDate} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
-import {Router} from "@angular/router";
 import * as faker from "faker/locale/en_US";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-contact-form',
@@ -75,8 +75,8 @@ export class ContactFormComponent implements OnInit {
       addresses: this.contactForm?.value.addresses
     });
     this.contactId ? await this.contactService.putContact(contact) : await this.contactService.postContact(contact);
-    await this.router.navigate(['home']);
 
+    await this.router.navigate(['home']);
   }
 
   async ngOnInit() {

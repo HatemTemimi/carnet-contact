@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule} from '@angular/material/core';
 import { ContactService } from './services/contact.service';
+import { ButtonRendererComponent} from './btn-cell-renderer/btn-cell-renderer.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ContactService } from './services/contact.service';
     NavbarComponent,
     ContactsGridComponent,
     ContactFormComponent,
+    ButtonRendererComponent,
   ],
   imports: [
     HttpClientModule,

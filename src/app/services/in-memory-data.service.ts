@@ -10,19 +10,29 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const contacts = [
     
-        { id: faker.datatype.number(1000),
-          nom: faker.lorem.word(), prenom:faker.lorem.word(), dateDeNaissance: '1996-11-17', addresses: [
-          {type:"domicile",
-          rue:faker.address.streetAddress(),
-          ville:faker.address.city(),
-          numero:faker.datatype.number(10000),
-          codePostal:faker.address.zipCode(),
-          pays:faker.address.country(),
-          commentaire:faker.lorem.sentence(),
-          numeroTel:"",
+        { 
+          id: 1,
+          nom: faker.lorem.word(), 
+          prenom:faker.lorem.word(), 
+          dateDeNaissance: '1996-11-17', 
+          addresses: 
+          [
+          {
+            type:"domicile",
+            rue:faker.address.streetAddress(),
+            ville:faker.address.city(),
+            numero:faker.datatype.number(10000),
+            codePostal:faker.address.zipCode(),
+            pays:faker.address.country(),
+            commentaire:faker.lorem.sentence(),
+            numeroTel:faker.phone.phoneNumber(),
           }],
         },
-        { id: faker.datatype.number(1000), nom: faker.lorem.word(), prenom:faker.lorem.word(), dateDeNaissance: '1996-11-17', addresses: 
+        { id: 2, 
+          nom: faker.lorem.word(), 
+          prenom:faker.lorem.word(), 
+          dateDeNaissance: '1996-11-17', 
+          addresses: 
         [
           {
           type:"domicile",
@@ -32,9 +42,9 @@ export class InMemoryDataService implements InMemoryDbService {
           codePostal:faker.address.zipCode(),
           pays:faker.address.country(),
           commentaire:faker.lorem.sentence(),
-          numeroTel:"",
+          numeroTel:faker.phone.phoneNumber(),
         },
-        { id: faker.datatype.number(1000),nom: faker.lorem.word(), prenom:faker.lorem.word(),dateDeNaissance: '1996-11-17',
+        {
           type:"travail",
           rue:faker.address.streetAddress(),
           ville:faker.address.city(),
@@ -42,21 +52,30 @@ export class InMemoryDataService implements InMemoryDbService {
           codePostal:faker.address.zipCode(),
           pays:faker.address.country(),
           commentaire:faker.lorem.sentence(),
-          numeroTel:""},
+          numeroTel:faker.phone.phoneNumber(),
+        },
         ],
         },
-{ id: faker.datatype.number(1000),
-          nom: faker.lorem.word(), prenom:faker.lorem.word(), dateDeNaissance: '1996-11-17', addresses: [
-          {type:"domicile",
+        { 
+          id: 3,
+          nom: faker.lorem.word(), 
+          prenom:faker.lorem.word(), 
+          dateDeNaissance: '1996-11-17', 
+          addresses: 
+          [
+            {
+            type:"domicile",
           rue:faker.address.streetAddress(),
           ville:faker.address.city(),
           numero:faker.datatype.number(10000),
           codePostal:faker.address.zipCode(),
           pays:faker.address.country(),
           commentaire:faker.lorem.sentence(),
-          numeroTel:"",
-          }],
+          numeroTel:faker.phone.phoneNumber(),
+            }
+          ],
         },
+
         ];
     return {contacts};
   }

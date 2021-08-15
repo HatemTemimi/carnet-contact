@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../services/contact.service';
 import { Router } from "@angular/router";
+import { ButtonRendererComponent } from '../btn-cell-renderer/btn-cell-renderer.component';
 
 
 @Component({
@@ -11,12 +12,17 @@ import { Router } from "@angular/router";
 export class ContactsGridComponent implements OnInit {
 
   defaultColDef;
+  frameworkComponents: any;
+  rowDataClicked = {};
 
-  columnDefs = [
-    {
+  columnDefs = 
+  [
+   {
       headerName: 'Personne',
       children: [
-        { field: 'nom' },
+        { field: 'nom' 
+        },
+
         { field: 'prenom' },
         { field: 'dateDeNaissance' },
       ]
@@ -34,12 +40,21 @@ export class ContactsGridComponent implements OnInit {
         { field: 'numeroTel', columnGroupShow: 'closed' }
       ],
 
-    }
+    },
+     {
+      headerName: 'Action',
+      cellRenderer: 'buttonRenderer',
+      cellRendererParams: {
+        onClick: this.onBtnClick.bind(this),
+        label: 'Effacer'
+      }
+    },
+    
   ];
 
   rowData: {
     id: number,
-    name: string,
+    nom: string,
     prenom: string,
     dateDeNaissance?: string,
     type?: string,
@@ -58,6 +73,9 @@ export class ContactsGridComponent implements OnInit {
     private router: Router,
     private contactService: ContactService
   ) {
+    this.frameworkComponents = {
+      buttonRenderer: ButtonRendererComponent,
+    }
      this.defaultColDef = {
       flex: 1,
       minWidth: 100,
@@ -71,7 +89,7 @@ export class ContactsGridComponent implements OnInit {
       if (!contact.addresses) {
         this.rowData.push({
           id: contact.id,
-          name: contact.nom,
+          nom: contact.nom,
           prenom: contact.prenom,
           dateDeNaissance: contact.dateDeNaissance
         });
@@ -80,7 +98,7 @@ export class ContactsGridComponent implements OnInit {
       for (const address of contact.addresses) {
         this.rowData.push({
           id: contact.id,
-          name: contact.nom,
+          nom: contact.nom,
           prenom: contact.prenom,
           dateDeNaissance: contact.dateDeNaissance,
           type: address.type,
@@ -105,6 +123,12 @@ export class ContactsGridComponent implements OnInit {
 
   async modifyContact(event) {
     await this.router.navigate(['/form/' + event.data.id]);
+  }
+
+  onBtnClick(e) {
+    this.rowDataClicked = e.rowData.id;
+    this.deleteContact(e.rowData.id);
+    this.router.navigate(['/home/' ]); 
   }
 
 }

@@ -6,6 +6,7 @@
   [rowData]="rowData"
   [columnDefs]="columnDefs"
   [defaultColDef]="defaultColDef"
+  [frameworkComponents]="frameworkComponents"
   onGridReady={onGridReady}
-  (rowClicked)="modifyContact($event)"
+  (cellDoubleClicked)="modifyContact($event)" 
 ></ag-grid-angular>

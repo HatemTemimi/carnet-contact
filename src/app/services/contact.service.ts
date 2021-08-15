@@ -30,6 +30,7 @@ export class ContactService {
   }
 
   public async deleteContact(id: number) {
+    
     return this.http.delete(this.CONTACT_API_URL + id).toPromise();
   }
 
