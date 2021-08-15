@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { FormBuilder,FormGroup, FormArray, Form } from '@angular/forms';
+import { FormBuilder,FormGroup, FormArray, Form, Validators } from '@angular/forms';
 import {Contact} from "../interfaces/contact";
 import {ContactService} from "../services/contact/contact.service";
 import {formatDate} from "@angular/common";
 import * as faker from "faker/locale/en_US";
 import {ActivatedRoute} from "@angular/router";
+
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-contact-form',
@@ -22,12 +24,13 @@ export class ContactFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.contactForm = this.formBuilder.group({
-      nom: this.formBuilder.control(''),
-      prenom: this.formBuilder.control(''),
-      date : this.formBuilder.control(''),
+      nom: this.formBuilder.control('', [Validators.required,Validators.minLength(3),Validators.maxLength(8)]),
+      prenom: this.formBuilder.control('', [Validators.required,Validators.minLength(3),Validators.maxLength(8)]),
+      date : this.formBuilder.control('', Validators.required),
       addresses: this.formBuilder.array([this.creeAddresse()])
     });
   }
@@ -52,10 +55,10 @@ export class ContactFormComponent implements OnInit {
     numeroTel: number
   }): FormGroup {
     return this.formBuilder.group({
-      type: this.formBuilder.control(!this.contactId ? '' : address?.type),
-      rue: this.formBuilder.control(!this.contactId ? '' : address?.rue),
-      ville: this.formBuilder.control(!this.contactId ? '' : address?.ville),
-      numero: this.formBuilder.control(!this.contactId ? '' : address?.numero),
+      type: this.formBuilder.control(!this.contactId ? '' : address?.type, Validators.required),
+      rue: this.formBuilder.control(!this.contactId ? '' : address?.rue, Validators.required),
+      ville: this.formBuilder.control(!this.contactId ? '' : address?.ville, Validators.required),
+      numero: this.formBuilder.control(!this.contactId ? '' : address?.numero, Validators.required),
       codePostal: this.formBuilder.control(!this.contactId ? '' : address?.codePostal),
       pays: this.formBuilder.control(!this.contactId ? '' : address?.pays),
       commentaire: this.formBuilder.control(!this.contactId ? '' : address?.commentaire),
@@ -69,15 +72,17 @@ export class ContactFormComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.contactForm.value.date);
+    console.log(this.contactForm.value);
     const contact = new Contact({
-      id: this.contactId ? this.contact?.id : faker.random.number(1000),
+      id: this.contactId ? this.contact?.id : faker.datatype.number(1000),
       nom: this.contactForm?.value.nom,
       prenom: this.contactForm?.value.prenom,
       dateDeNaissance: formatDate(this.contactForm?.value.date, 'yyyy-MM-dd', 'en-US'),
       addresses: this.contactForm?.value.addresses
     });
     this.contactId ? await this.contactService.putContact(contact) : await this.contactService.postContact(contact);
+    this.router.navigate(['home']);
+    
   }
 
   async ngOnInit() {

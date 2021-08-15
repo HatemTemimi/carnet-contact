@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import * as faker from 'faker/locale/en_US';
+import { Contact } from 'src/app/interfaces/contact';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +9,84 @@ import * as faker from 'faker/locale/en_US';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const contacts = [
-        { id: faker.random.number(1000), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance: '1996-11-17'},
-        { id: faker.random.number(1000), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance: '1996-11-17'},
-        { id: faker.random.number(1000), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance: '1996-11-17'},
-   ];
+    
+        { id: faker.datatype.number(1000), nom: faker.lorem.word(), prenom:faker.lorem.word(), dateDeNaissance: '1996-11-17',
+          type:"domicile",
+          rue:faker.address.streetAddress(),
+          ville:faker.address.city(),
+          numero:faker.datatype.number(10000),
+          codePostal:faker.address.zipCode(),
+          pays:faker.address.country(),
+          commentaire:faker.lorem.sentence(),
+          numeroTel:""},
+        { id: faker.datatype.number(1000),nom: faker.lorem.word(), prenom:faker.lorem.word(),dateDeNaissance: '1996-11-17',
+          type:"travail",
+          rue:faker.address.streetAddress(),
+          ville:faker.address.city(),
+          numero:faker.datatype.number(10000),
+          codePostal:faker.address.zipCode(),
+          pays:faker.address.country(),
+          commentaire:faker.lorem.sentence(),
+          numeroTel:""},
+        { id: faker.datatype.number(1000),nom: faker.lorem.word(), prenom:faker.lorem.word(),dateDeNaissance: '1996-11-17',
+          type:"travail",
+          rue:faker.address.streetAddress(),
+          ville:faker.address.city(),
+          numero:faker.datatype.number(10000),
+          codePostal:faker.address.zipCode(),
+          pays:faker.address.country(),
+          commentaire:faker.lorem.sentence(),
+          numeroTel:""},
+         { id: faker.datatype.number(1000),nom: faker.lorem.word(), prenom:faker.lorem.word(),dateDeNaissance: '1996-11-17',
+          type:"travail",
+          rue:faker.address.streetAddress(),
+          ville:faker.address.city(),
+          numero:faker.datatype.number(10000),
+          codePostal:faker.address.zipCode(),
+          pays:faker.address.country(),
+          commentaire:faker.lorem.sentence(),
+          numeroTel:""}, 
+        { id: faker.datatype.number(1000),nom: faker.lorem.word(), prenom:faker.lorem.word(),dateDeNaissance: '1996-11-17',
+          type:"travail",
+          rue:faker.address.streetAddress(),
+          ville:faker.address.city(),
+          numero:faker.datatype.number(10000),
+          codePostal:faker.address.zipCode(),
+          pays:faker.address.country(),
+          commentaire:faker.lorem.sentence(),
+          numeroTel:""},
+        { id: faker.datatype.number(1000),nom: faker.lorem.word(), prenom:faker.lorem.word(),dateDeNaissance: '1996-11-17',
+          type:"travail",
+          rue:faker.address.streetAddress(),
+          ville:faker.address.city(),
+          numero:faker.datatype.number(10000),
+          codePostal:faker.address.zipCode(),
+          pays:faker.address.country(),
+          commentaire:faker.lorem.sentence(),
+          numeroTel:""},
+        { id: faker.datatype.number(1000), nom: faker.lorem.word(), prenom:faker.lorem.word(), dateDeNaissance: '1996-11-17', addresses: [
+          {
+          type:"domicile",
+          rue:faker.address.streetAddress(),
+          ville:faker.address.city(),
+          numero:faker.datatype.number(10000),
+          codePostal:faker.address.zipCode(),
+          pays:faker.address.country(),
+          commentaire:faker.lorem.sentence(),
+          numeroTel:"",
+        },
+        { id: faker.datatype.number(1000),nom: faker.lorem.word(), prenom:faker.lorem.word(),dateDeNaissance: '1996-11-17',
+          type:"travail",
+          rue:faker.address.streetAddress(),
+          ville:faker.address.city(),
+          numero:faker.datatype.number(10000),
+          codePostal:faker.address.zipCode(),
+          pays:faker.address.country(),
+          commentaire:faker.lorem.sentence(),
+          numeroTel:""},
+      ],
+        },
+        ];
     return {contacts};
   }
 

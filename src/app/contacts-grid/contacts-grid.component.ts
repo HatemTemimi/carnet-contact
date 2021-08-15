@@ -3,6 +3,7 @@ import { ContactService } from '../services/contact/contact.service';
 import { Contact } from '../interfaces/contact';
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-contacts-grid',
   templateUrl: './contacts-grid.component.html',
@@ -14,7 +15,7 @@ export class ContactsGridComponent implements OnInit {
 
   columnDefs = [
     {
-      headerName: 'Personnes',
+      headerName: 'Personne',
       children: [
         { field: 'nom' },
         { field: 'prenom' },
@@ -24,15 +25,16 @@ export class ContactsGridComponent implements OnInit {
     {
       headerName: 'Addresses',
       children: [
-        { field: 'type' },
-        { field: 'rue' },
-        { field: 'ville' },
+        { field: 'type' , rowGroup:true},
+        { field: 'rue'},
+        { field: 'ville'},
         { field: 'numero' },
-        { field: 'codePostal',columnGroupShow: 'closed' },
         { field: 'pays' },
+        { field: 'codePostal',columnGroupShow: 'closed' },
         { field: 'commentaire', columnGroupShow: 'closed' },
         { field: 'numeroTel', columnGroupShow: 'closed' }
-      ]
+      ],
+      
     }
   ];
 
@@ -51,7 +53,7 @@ export class ContactsGridComponent implements OnInit {
 
   async ngOnInit() {
     this.rowData = await this.contactService.getContacts();
-    console.log(this.rowData);
+    console.log('row data : ' + JSON.stringify(this.rowData));
   }
 
   async deleteContact(id: string) {
