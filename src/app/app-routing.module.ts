@@ -5,7 +5,8 @@ import { ContactsGridComponent } from './contacts-grid/contacts-grid.component';
 
 const routes: Routes = [
   {path: 'home', component: ContactsGridComponent},
-  {path: 'add', component:ContactFormComponent},
+  {path: 'form/:id', component: ContactFormComponent},
+  {path: 'form', component:ContactFormComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

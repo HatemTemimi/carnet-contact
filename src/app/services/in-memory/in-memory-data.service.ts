@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-
 import * as faker from 'faker/locale/en_US';
 
 @Injectable({
@@ -9,9 +8,9 @@ import * as faker from 'faker/locale/en_US';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const contacts = [
-        { id:faker.random.uuid(), nom: faker.internet.domainName(), prenom:faker.name.findName(),dateDeNaissance:faker.date.future()},
-        { id:faker.random.uuid(), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance:faker.date.future()},
-        { id:faker.random.uuid(), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance:faker.date.future()},
+        { id: faker.random.number(1000), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance: '1996-11-17'},
+        { id: faker.random.number(1000), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance: '1996-11-17'},
+        { id: faker.random.number(1000), nom: faker.internet.domainName(), prenom:faker.name.findName(), dateDeNaissance: '1996-11-17'},
    ];
     return {contacts};
   }
@@ -21,5 +20,5 @@ export class InMemoryDataService implements InMemoryDbService {
   // the method below returns the initial number (11).
   // if the heroes array is not empty, the method below returns the highest
   // hero id + 1.
-  
+
 }

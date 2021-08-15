@@ -23,10 +23,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import { BlocAddresseComponent } from './bloc-addresse/bloc-addresse.component';
-import { ContactServiceService } from './services/contact/contact-service.service';
+import { ContactService } from './services/contact/contact.service';
+import {MatMomentDateModule, MomentDateAdapter} from "@angular/material-moment-adapter";
 
+const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD MMMM YYYY',
+  },
+  display: {
+    dateInput: 'DD MMMM YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -40,7 +52,7 @@ import { ContactServiceService } from './services/contact/contact-service.servic
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false, delay: 500 }
 ),
-    InMemoryWebApiModule.forFeature(InMemoryDataService),  
+    InMemoryWebApiModule.forFeature(InMemoryDataService),
     BrowserModule,
     MatMenuModule,
     AppRoutingModule,
@@ -61,9 +73,13 @@ import { ContactServiceService } from './services/contact/contact-service.servic
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    
+
   ],
-  providers: [ContactServiceService],
+  providers: [
+    ContactService,
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
