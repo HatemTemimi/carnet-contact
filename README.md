@@ -6,7 +6,9 @@ it supports various addresses for one user, but will display them in multiple ro
 
 the application is production ready and is live on heroku via this link : https://carnet-contact.herokuapp.com
 
-## Development server
+## Development server / config
+
+Run `npm install` to install all the required dependencies.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
