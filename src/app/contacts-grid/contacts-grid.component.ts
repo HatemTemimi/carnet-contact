@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService } from '../services/contact/contact.service';
-import { Contact } from '../interfaces/contact';
-import {Router} from "@angular/router";
+import { ContactService } from '../services/contact.service';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -25,7 +24,7 @@ export class ContactsGridComponent implements OnInit {
     {
       headerName: 'Addresses',
       children: [
-        { field: 'type' , rowGroup:true},
+        { field: 'type' },
         { field: 'rue'},
         { field: 'ville'},
         { field: 'numero' },
@@ -34,11 +33,26 @@ export class ContactsGridComponent implements OnInit {
         { field: 'commentaire', columnGroupShow: 'closed' },
         { field: 'numeroTel', columnGroupShow: 'closed' }
       ],
-      
+
     }
   ];
 
-  rowData: Contact[] = [];
+  rowData: {
+    id: number,
+    name: string,
+    prenom: string,
+    dateDeNaissance?: string,
+    type?: string,
+    rue?: string,
+    ville?: string,
+    numero?: number,
+    pays?: string,
+    codePostal?: number,
+    commentaire?: string,
+    numeroTel?: number
+  }[] = [];
+
+  initialized = false;
 
   constructor(
     private router: Router,
@@ -52,17 +66,45 @@ export class ContactsGridComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.rowData = await this.contactService.getContacts();
+    const contacts = await this.contactService.getContacts();
+    for (const contact of contacts) {
+      if (!contact.addresses) {
+        this.rowData.push({
+          id: contact.id,
+          name: contact.nom,
+          prenom: contact.prenom,
+          dateDeNaissance: contact.dateDeNaissance
+        });
+        continue;
+      }
+      for (const address of contact.addresses) {
+        this.rowData.push({
+          id: contact.id,
+          name: contact.nom,
+          prenom: contact.prenom,
+          dateDeNaissance: contact.dateDeNaissance,
+          type: address.type,
+          rue: address.rue,
+          ville: address.ville,
+          numero: address.numero,
+          pays: address.pays,
+          codePostal: address.codePostal,
+          commentaire: address.commentaire,
+          numeroTel: address.numeroTel
+        });
+      }
+    }
+    this.initialized = true;
     console.log('row data : ' + JSON.stringify(this.rowData));
   }
 
-  async deleteContact(id: string) {
+  async deleteContact(id: number) {
     await this.contactService.deleteContact(id);
     this.rowData = this.rowData.filter(row => row.id !== id);
   }
 
   async modifyContact(event) {
-    this.router.navigate(['/form/' + event.data.id]);
+    await this.router.navigate(['/form/' + event.data.id]);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Contact } from '../../interfaces/contact';
+import { Contact } from '../interfaces/contact';
 import { Observable, throwError } from 'rxjs';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ContactService {
     return this.http.get<Contact[]>(this.CONTACT_API_URL).toPromise();
   }
 
-  public async getContact(id: string): Promise<Contact> {
+  public async getContact(id: number): Promise<Contact> {
     console.log(this.CONTACT_API_URL + id);
     return this.http.get<Contact>(this.CONTACT_API_URL + id).toPromise();
   }
@@ -29,7 +29,7 @@ export class ContactService {
     return this.http.put(this.CONTACT_API_URL + c.id, c).toPromise();
   }
 
-  public async deleteContact(id: string) {
+  public async deleteContact(id: number) {
     return this.http.delete(this.CONTACT_API_URL + id).toPromise();
   }
 

@@ -1,12 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { FormBuilder,FormGroup, FormArray, Form, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import { FormBuilder,FormGroup, FormArray, Validators } from '@angular/forms';
 import {Contact} from "../interfaces/contact";
-import {ContactService} from "../services/contact/contact.service";
+import {ContactService} from "../services/contact.service";
 import {formatDate} from "@angular/common";
-import * as faker from "faker/locale/en_US";
 import {ActivatedRoute} from "@angular/router";
-
 import {Router} from "@angular/router";
+import * as faker from "faker/locale/en_US";
 
 @Component({
   selector: 'app-contact-form',
@@ -66,11 +65,6 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
-  supprimerAddresse(i: number) {
-    let addressesArr = this.contactForm?.get('addresses') as FormArray;
-    addressesArr.removeAt(i);
-  }
-
   async onSubmit() {
     console.log(this.contactForm.value);
     const contact = new Contact({
@@ -81,8 +75,8 @@ export class ContactFormComponent implements OnInit {
       addresses: this.contactForm?.value.addresses
     });
     this.contactId ? await this.contactService.putContact(contact) : await this.contactService.postContact(contact);
-    this.router.navigate(['home']);
-    
+    await this.router.navigate(['home']);
+
   }
 
   async ngOnInit() {

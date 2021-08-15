@@ -1,6 +1,6 @@
 export class Contact {
 
-  id: string = '';
+  id: number = 1;
 
   nom: string = '';
 
