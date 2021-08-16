@@ -25,6 +25,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule} from '@angular/material/core';
 import { ContactService } from './services/contact.service';
 import { ButtonRendererComponent} from './btn-cell-renderer/btn-cell-renderer.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,9 @@ import { ButtonRendererComponent} from './btn-cell-renderer/btn-cell-renderer.co
     MatNativeDateModule,
     ReactiveFormsModule,
   ],
-  providers: [ContactService],
+  providers: [ContactService,
+              {provide: LocationStrategy, useClass: HashLocationStrategy},
+              ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
