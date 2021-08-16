@@ -1,82 +1,72 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../services/contact.service';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { ButtonRendererComponent } from '../btn-cell-renderer/btn-cell-renderer.component';
-
 
 @Component({
   selector: 'app-contacts-grid',
   templateUrl: './contacts-grid.component.html',
-  styleUrls: ['./contacts-grid.component.scss']
+  styleUrls: ['./contacts-grid.component.scss'],
 })
 export class ContactsGridComponent implements OnInit {
-
   defaultColDef;
   frameworkComponents: any;
   rowDataClicked = {};
 
-  columnDefs = 
-  [
-   {
+  columnDefs = [
+    {
       headerName: 'Personne',
       children: [
-        { field: 'nom' 
-        },
-
+        { field: 'nom' },
         { field: 'prenom' },
         { field: 'dateDeNaissance' },
-      ]
+      ],
     },
     {
       headerName: 'Addresses',
       children: [
         { field: 'type' },
-        { field: 'rue'},
-        { field: 'ville'},
+        { field: 'rue' },
+        { field: 'ville' },
         { field: 'numero' },
         { field: 'pays' },
-        { field: 'codePostal',columnGroupShow: 'closed' },
+        { field: 'codePostal', columnGroupShow: 'closed' },
         { field: 'commentaire', columnGroupShow: 'closed' },
-        { field: 'numeroTel', columnGroupShow: 'closed' }
+        { field: 'numeroTel', columnGroupShow: 'closed' },
       ],
-
     },
-     {
+    {
       headerName: 'Action',
       cellRenderer: 'buttonRenderer',
       cellRendererParams: {
         onClick: this.onBtnClick.bind(this),
-        label: 'Effacer'
-      }
+        label: 'Effacer',
+      },
     },
-    
   ];
 
   rowData: {
-    id: number,
-    nom: string,
-    prenom: string,
-    dateDeNaissance?: string,
-    type?: string,
-    rue?: string,
-    ville?: string,
-    numero?: number,
-    pays?: string,
-    codePostal?: number,
-    commentaire?: string,
-    numeroTel?: number
+    id: number;
+    nom: string;
+    prenom: string;
+    dateDeNaissance?: string;
+    type?: string;
+    rue?: string;
+    ville?: string;
+    numero?: number;
+    pays?: string;
+    codePostal?: number;
+    commentaire?: string;
+    numeroTel?: number;
   }[] = [];
 
   initialized = false;
 
-  constructor(
-    private router: Router,
-    private contactService: ContactService
-  ) {
+  constructor(private router: Router, private contactService: ContactService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
-    }
-     this.defaultColDef = {
+    };
+    this.defaultColDef = {
       flex: 1,
       minWidth: 100,
       resizable: true,
@@ -91,7 +81,7 @@ export class ContactsGridComponent implements OnInit {
           id: contact.id,
           nom: contact.nom,
           prenom: contact.prenom,
-          dateDeNaissance: contact.dateDeNaissance
+          dateDeNaissance: contact.dateDeNaissance,
         });
         continue;
       }
@@ -108,17 +98,16 @@ export class ContactsGridComponent implements OnInit {
           pays: address.pays,
           codePostal: address.codePostal,
           commentaire: address.commentaire,
-          numeroTel: address.numeroTel
+          numeroTel: address.numeroTel,
         });
       }
     }
     this.initialized = true;
-    console.log('row data : ' + JSON.stringify(this.rowData));
   }
 
   async deleteContact(id: number) {
     await this.contactService.deleteContact(id);
-    this.rowData = this.rowData.filter(row => row.id !== id);
+    this.rowData = this.rowData.filter((row) => row.id !== id);
   }
 
   async modifyContact(event) {
@@ -128,7 +117,6 @@ export class ContactsGridComponent implements OnInit {
   onBtnClick(e) {
     this.rowDataClicked = e.rowData.id;
     this.deleteContact(e.rowData.id);
-    this.router.navigate(['/home/' ]); 
+    this.router.navigate(['/home/']);
   }
-
 }
