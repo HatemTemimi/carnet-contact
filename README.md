@@ -17,8 +17,11 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 # Use
 
 contacts are added via the form accessible from the navbar button on the top-right.
+
 ag-grid displays the list of contacts on the homepage that you can also access from the navbar.
+
 double clicking on a contact in ag-grid will take you to the update form.
+
 deleting contacts is done with the delete button, to the right on the ag-grid.
 
 ## Further help
