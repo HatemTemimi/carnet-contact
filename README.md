@@ -1,6 +1,6 @@
 # ContactGrid
 
-This is a small address-book CRUD single page application, made using Angular, MaterialUI, Ag-grid and the In-memory-web-Api to make up for the backend.  
+This is a small address-book CRUD single page application, made using Angular, MaterialUI, Ag-grid and the In-memory-web-Api to make up for the backend.
 
 it supports various addresses for one user, but will display them in multiple rows in the ag-grid since row grouping is an entreprise feature and i will maybe be making updates in the future.
 
@@ -14,13 +14,12 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+# Use
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+contacts are added via the form accessible from the navbar button on the top-right.
+ag-grid displays the list of contacts on the homepage that you can also access from the navbar.
+double clicking on a contact in ag-grid will take you to the update form.
+deleting contacts is done with the delete button, to the right on the ag-grid.
 
 ## Further help
 

@@ -4,11 +4,10 @@ import { Contact } from '../interfaces/contact';
 import { Observable, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContactService {
-
-  private readonly CONTACT_API_URL = '/api/contacts/'
+  private readonly CONTACT_API_URL = '/api/contacts/';
 
   constructor(private http: HttpClient) {}
 
@@ -30,13 +29,11 @@ export class ContactService {
   }
 
   public async deleteContact(id: number) {
-    
     return this.http.delete(this.CONTACT_API_URL + id).toPromise();
   }
 
-  private handleError (error: any) {
+  private handleError(error: any) {
     console.error(error); // log to console instead
     return throwError(error);
   }
-
 }

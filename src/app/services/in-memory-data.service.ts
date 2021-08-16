@@ -9,75 +9,72 @@ import { Contact } from 'src/app/interfaces/contact';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const contacts = [
-    
-        { 
-          id: 1,
-          nom: faker.lorem.word(), 
-          prenom:faker.lorem.word(), 
-          dateDeNaissance: '1996-11-17', 
-          addresses: 
-          [
+      {
+        id: 1,
+        nom: faker.lorem.word(),
+        prenom: faker.lorem.word(),
+        dateDeNaissance: '1996-11-17',
+        addresses: [
           {
-            type:"domicile",
-            rue:faker.address.streetAddress(),
-            ville:faker.address.city(),
-            numero:faker.datatype.number(10000),
-            codePostal:faker.address.zipCode(),
-            pays:faker.address.country(),
-            commentaire:faker.lorem.sentence(),
-            numeroTel:faker.phone.phoneNumber(),
-          }],
-        },
-        { id: 2, 
-          nom: faker.lorem.word(), 
-          prenom:faker.lorem.word(), 
-          dateDeNaissance: '1996-11-17', 
-          addresses: 
-        [
-          {
-          type:"domicile",
-          rue:faker.address.streetAddress(),
-          ville:faker.address.city(),
-          numero:faker.datatype.number(10000),
-          codePostal:faker.address.zipCode(),
-          pays:faker.address.country(),
-          commentaire:faker.lorem.sentence(),
-          numeroTel:faker.phone.phoneNumber(),
-        },
-        {
-          type:"travail",
-          rue:faker.address.streetAddress(),
-          ville:faker.address.city(),
-          numero:faker.datatype.number(10000),
-          codePostal:faker.address.zipCode(),
-          pays:faker.address.country(),
-          commentaire:faker.lorem.sentence(),
-          numeroTel:faker.phone.phoneNumber(),
-        },
+            type: 'domicile',
+            rue: faker.address.streetAddress(),
+            ville: faker.address.city(),
+            numero: faker.datatype.number(10000),
+            codePostal: faker.address.zipCode(),
+            pays: faker.address.country(),
+            commentaire: faker.lorem.sentence(),
+            numeroTel: faker.phone.phoneNumber(),
+          },
         ],
-        },
-        { 
-          id: 3,
-          nom: faker.lorem.word(), 
-          prenom:faker.lorem.word(), 
-          dateDeNaissance: '1996-11-17', 
-          addresses: 
-          [
-            {
-            type:"domicile",
-          rue:faker.address.streetAddress(),
-          ville:faker.address.city(),
-          numero:faker.datatype.number(10000),
-          codePostal:faker.address.zipCode(),
-          pays:faker.address.country(),
-          commentaire:faker.lorem.sentence(),
-          numeroTel:faker.phone.phoneNumber(),
-            }
-          ],
-        },
-
-        ];
-    return {contacts};
+      },
+      {
+        id: 2,
+        nom: faker.lorem.word(),
+        prenom: faker.lorem.word(),
+        dateDeNaissance: '1996-11-17',
+        addresses: [
+          {
+            type: 'domicile',
+            rue: faker.address.streetAddress(),
+            ville: faker.address.city(),
+            numero: faker.datatype.number(10000),
+            codePostal: faker.address.zipCode(),
+            pays: faker.address.country(),
+            commentaire: faker.lorem.sentence(),
+            numeroTel: faker.phone.phoneNumber(),
+          },
+          {
+            type: 'travail',
+            rue: faker.address.streetAddress(),
+            ville: faker.address.city(),
+            numero: faker.datatype.number(10000),
+            codePostal: faker.address.zipCode(),
+            pays: faker.address.country(),
+            commentaire: faker.lorem.sentence(),
+            numeroTel: faker.phone.phoneNumber(),
+          },
+        ],
+      },
+      {
+        id: 3,
+        nom: faker.lorem.word(),
+        prenom: faker.lorem.word(),
+        dateDeNaissance: '1996-11-17',
+        addresses: [
+          {
+            type: 'domicile',
+            rue: faker.address.streetAddress(),
+            ville: faker.address.city(),
+            numero: faker.datatype.number(10000),
+            codePostal: faker.address.zipCode(),
+            pays: faker.address.country(),
+            commentaire: faker.lorem.sentence(),
+            numeroTel: faker.phone.phoneNumber(),
+          },
+        ],
+      },
+    ];
+    return { contacts };
   }
 
   // Overrides the genId method to ensure that a hero always has an id.
@@ -85,5 +82,4 @@ export class InMemoryDataService implements InMemoryDbService {
   // the method below returns the initial number (11).
   // if the heroes array is not empty, the method below returns the highest
   // hero id + 1.
-
 }
